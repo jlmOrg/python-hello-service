@@ -6,10 +6,12 @@ Repository that holds the python backend
 poetry run uvicorn app.main:app --reload
 ```
 
+<!---
 # Update Dependencies (as needed)
 ```shell
 poetry export --without-hashes --format=requirements.txt > requirements.txt
 ```
+--->
 
 # Setup
 ## Install Poetry
