@@ -13,6 +13,18 @@ poetry export --without-hashes --format=requirements.txt > requirements.txt
 ```
 --->
 
+# Endpoints
+Current prefix is `v1`
+
+## GET
+- `/hello` - 
+  - **Returns →** "Hello, world!"
+
+## POST
+- `/hello`  
+  - **Requests →** string (name)
+  - **Returns →** "Hello, <name>!"
+
 # Setup
 ## Install Poetry
 ```shell
