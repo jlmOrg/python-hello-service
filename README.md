@@ -18,7 +18,7 @@ Current prefix is `v1`
 
 ## GET
 - `/hello` - 
-  - **Returns → ** "Hello, world!"
+  - **Returns →** "Hello, world!"
 
 ## POST
 - `/hello`  
