@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.controllers.hello_controller import router as api_router
+from app.api.hello_controller import router as api_router
 
 app = FastAPI(title="FastAPI Skeleton")
 
