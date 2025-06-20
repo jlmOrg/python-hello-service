@@ -23,7 +23,7 @@ Current prefix is `v1`
 ## POST
 - `/hello`  
   - **Requests →** string (name)
-  - **Returns →** "Hello, <name>!"
+  - **Returns →** "Hello, (name)!"
 
 # Setup
 ## Install Poetry
