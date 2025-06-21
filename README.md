@@ -25,6 +25,11 @@ Current prefix is `v1`
   - **Requests →** string (name)
   - **Returns →** "Hello, (name)!"
 
+# Build Docker Image
+```shell
+docker build -t python-hello-service .
+```
+
 # Setup
 ## Install Poetry
 ```shell
