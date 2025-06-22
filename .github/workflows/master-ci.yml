@@ -1,4 +1,4 @@
-name: Python CI/CD Pipeline
+name: python-hello-service
 
 on:
   pull_request:
