@@ -12,3 +12,4 @@ jobs:
     with:
       image-name: python-hello-service
       python-version: '3.13'
+      ecr-registry: '550487074477.dkr.ecr.us-east-1.amazonaws.com'
