@@ -28,12 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
-      - name: Install Poetry and Dependencies
+      - name: Install Dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -45,8 +45,8 @@ jobs:
           pip install pytest pytest-cov junit-xml
           pytest --junitxml=test-results.xml
 
-      - name: Upload Test artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Test Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: test-results.xml
@@ -59,12 +59,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
-      - name: Install Poetry and Coverage Tool
+      - name: Install Dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -78,8 +78,8 @@ jobs:
           coverage report
           coverage xml
 
-      - name: Upload Coverage artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Coverage Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage.xml
@@ -92,12 +92,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set Up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
 
-      - name: Install Poetry and Flake8
+      - name: Install Dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -108,8 +108,8 @@ jobs:
       - name: Run Flake8
         run: flake8 --format=checkstyle --output-file=flake8-report.xml . || true
 
-      - name: Upload Flake8 artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload Flake8 Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: flake8-report
           path: flake8-report.xml
