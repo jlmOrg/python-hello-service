@@ -30,6 +30,11 @@ Current prefix is `v1`
 docker build -t python-hello-service .
 ```
 
+# Run Flake8 Linter
+```shell
+flake8 .
+```
+
 # Setup
 ## Install Poetry
 ```shell

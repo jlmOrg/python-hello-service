@@ -43,3 +43,53 @@ jobs:
       - name: Run Tests
         run: poetry run pytest
 
+  test-coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Poetry and Coverage Tool
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          poetry config virtualenvs.create false
+          poetry install --with dev --no-interaction --no-ansi
+          pip install coverage
+
+      - name: Run Coverage
+        run: |
+          coverage run -m pytest
+          coverage report
+          coverage xml
+
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Poetry and Flake8
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          poetry config virtualenvs.create false
+          poetry install --only main --no-interaction --no-ansi
+          pip install flake8
+
+      - name: Run Flake8
+        run: flake8 .

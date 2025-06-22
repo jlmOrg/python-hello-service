@@ -8,6 +8,7 @@ app.include_router(router)
 
 client = TestClient(app)
 
+
 # get_hello returns 200 and "Hello, world!"
 def test_get_hello_should_return_200():
     response = client.get("/hello")
