@@ -1,5 +1,5 @@
-# python-microservice
-Repository that holds the python backend
+# python-hello-service
+Repository that holds the python backend for the `hello-service`
 
 # Run Service
 ```shell

@@ -1,0 +1,14 @@
+name: python-hello-service
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  call-template:
+    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@master
+    with:
+      image-name: python-hello-service
+      python-version: '3.13'
