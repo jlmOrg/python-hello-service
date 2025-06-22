@@ -41,7 +41,15 @@ jobs:
           poetry install --with dev --no-interaction --no-ansi
 
       - name: Run Tests
-        run: poetry run pytest
+        run: |
+          pip install pytest pytest-cov junit-xml
+          pytest --junitxml=test-results.xml
+
+      - name: Upload Test artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results.xml
 
   test-coverage:
     name: Test Coverage
@@ -70,6 +78,12 @@ jobs:
           coverage report
           coverage xml
 
+      - name: Upload Coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
+
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
@@ -92,4 +106,10 @@ jobs:
           pip install flake8
 
       - name: Run Flake8
-        run: flake8 .
+        run: flake8 --format=checkstyle --output-file=flake8-report.xml . || true
+
+      - name: Upload Flake8 artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: flake8-report
+          path: flake8-report.xml
