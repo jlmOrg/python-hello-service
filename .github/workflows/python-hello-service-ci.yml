@@ -8,7 +8,7 @@ on:
 
 jobs:
   call-template:
-    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@master
+    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@7-ecr-connectivity
     with:
       image-name: python-hello-service
       python-version: '3.13'
