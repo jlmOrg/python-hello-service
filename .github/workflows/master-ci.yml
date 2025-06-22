@@ -23,6 +23,7 @@ jobs:
   tests:
     name: Run Unit Tests
     runs-on: ubuntu-latest
+    needs: docker-build
 
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +38,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           poetry config virtualenvs.create false
-          poetry install --only main --no-interaction --no-ansi
+          poetry install --with dev --no-interaction --no-ansi
 
       - name: Run Tests
         run: poetry run pytest
