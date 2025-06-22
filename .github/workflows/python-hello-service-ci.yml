@@ -8,7 +8,7 @@ on:
 
 jobs:
   call-template:
-    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@2-templatize-python-pipeline
+    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@master
     with:
       image-name: python-hello-service
       python-version: '3.13'
