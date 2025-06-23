@@ -35,6 +35,37 @@ docker build -t python-hello-service .
 flake8 .
 ```
 
+# Deploy to Kubernetes
+
+## Kind Create The Cluster
+```shell
+kind create cluster --name python-dev
+```
+
+## Kind Load Docker Image
+```shell
+kind load docker-image python-hello-service:latest --name python-dev
+```
+
+## Run the `deployment.yml`
+This creates and maintains the pods
+```shell
+kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/deployment.yml
+```
+
+## Run the `service.yml`
+This allows for connectivity to the service
+```shell
+kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/service.yml
+```
+
+## Port-forward Into The Pod
+```shell
+kubectl port-forward python-hello-service-68b547bfdf-bdn5t 8000:8000
+```
+
+
+
 # Setup
 ## Install Poetry
 ```shell
