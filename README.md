@@ -97,6 +97,11 @@ Run `grafana-server` to start Grafana. Will run on port `3000`
 Add Prometheus as a datasource via `http://localhost:9000`
 
 
+# Connect to EKS
+## Add EKS Cluster
+```shell
+aws eks update-kubeconfig --region us-east-1 --name dev-hello-service
+```
 
 # Setup
 ## Install Poetry

@@ -8,10 +8,11 @@ on:
 
 jobs:
   call-template:
-    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@master
+    uses: jlmOrg/cicd-templates/.github/workflows/python-cicd-template.yml@7-ecr-connectivity
     with:
       image-name: python-hello-service
       python-version: '3.13'
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      EKS_DEV_CLUSTER_NAME: ${{ secrets.EKS_DEV_CLUSTER_NAME }}
