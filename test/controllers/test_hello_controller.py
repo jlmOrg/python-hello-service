@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app.controllers.hello_controller import router
+from app.controllers.hello_controller import hello_router
 
 app = FastAPI()
-app.include_router(router)
+app.include_router(hello_router)
 
 client = TestClient(app)
+
 
 # get_hello returns 200 and "Hello, world!"
 def test_get_hello_should_return_200():

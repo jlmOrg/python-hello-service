@@ -1,5 +1,5 @@
-# python-microservice
-Repository that holds the python backend
+# python-hello-service
+Repository that holds the python backend for the `hello-service`
 
 # Run Service
 ```shell
@@ -28,6 +28,40 @@ Current prefix is `v1`
 # Build Docker Image
 ```shell
 docker build -t python-hello-service .
+```
+
+# Run Flake8 Linter
+```shell
+flake8 .
+```
+
+# Deploy to Kubernetes
+
+## Kind Create The Cluster
+```shell
+kind create cluster --name python-dev
+```
+
+## Kind Load Docker Image
+```shell
+kind load docker-image python-hello-service:latest --name python-dev
+```
+
+## Run the `deployment.yml`
+This creates and maintains the pods
+```shell
+kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/deployment.yml
+```
+
+## Run the `service.yml`
+This allows for connectivity to the service
+```shell
+kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/service.yml
+```
+
+## Port-forward Into The Pod
+```shell
+kubectl port-forward python-hello-service-68b547bfdf-bdn5t 8000:8000
 ```
 
 
@@ -63,6 +97,11 @@ Run `grafana-server` to start Grafana. Will run on port `3000`
 Add Prometheus as a datasource via `http://localhost:9000`
 
 
+# Connect to EKS
+## Add EKS Cluster
+```shell
+aws eks update-kubeconfig --region us-east-1 --name dev-hello-service
+```
 
 # Setup
 ## Install Poetry
