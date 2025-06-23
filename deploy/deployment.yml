@@ -13,8 +13,8 @@ spec:
         app: python-hello-service
     spec:
       containers:
-      - name: python-hello-service
-        image: python-hello-service:latest
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 8000
+        - name: python-hello-service
+          image: ${IMAGE}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
