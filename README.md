@@ -65,6 +65,38 @@ kubectl port-forward python-hello-service-68b547bfdf-bdn5t 8000:8000
 ```
 
 
+# Metrics
+## Prometheus
+### Download Prometheus
+https://prometheus.io/download/
+
+### Update `prometheus.yml`
+Add another job to the `scrape_configs`. This allows Prometheus to scrape this service running locally on port `8000`
+```yaml
+  - job_name: 'python-hello-service'
+    static_configs:
+      - targets: ['localhost:8000']
+```
+
+### Start Prometheus
+From the directory where `prometheus.exe` and `prometheus.yml` lie, run this in a command prompt
+```shell
+./prometheus --config.file=prometheus.yml
+```
+
+Now Prometheus can be viewable on port `9090`
+
+## Grafana
+### Download Grafana
+https://grafana.com/grafana/download
+
+### Run Grafana
+Run `grafana-server` to start Grafana. Will run on port `3000`
+
+## Add Prometheus Datasource
+Add Prometheus as a datasource via `http://localhost:9000`
+
+
 
 # Setup
 ## Install Poetry
