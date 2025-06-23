@@ -2,7 +2,7 @@ name: python-hello-service
 
 on:
   pull_request:
-    branches: [ master ]
+#    branches: [ master ]
   push:
     branches: [ master ]
 

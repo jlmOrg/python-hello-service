@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: python-hello-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: python-hello-service
   ports:
-  - port: 8000
-    targetPort: 8000
-    nodePort: 30080
+    - port: 8000          # The port your service exposes
+      targetPort: 8000    # The port your container listens on
+      protocol: TCP
