@@ -1,7 +1,7 @@
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
-from starlette.responses import Response
-from fastapi import APIRouter, Request
 import time
+
+from fastapi import Request
+from prometheus_client import Counter, Histogram
 
 # Metrics definitions
 REQUEST_COUNT = Counter(
@@ -20,18 +20,11 @@ ERROR_COUNT = Counter(
     ["method", "endpoint"]
 )
 
-# Metrics endpoint router
-metrics_router = APIRouter()
-
-@metrics_router.get("/metrics")
-async def metrics():
-    data = generate_latest()
-    return Response(content=data, media_type=CONTENT_TYPE_LATEST)
-
 # Middleware function to collect metrics on all requests
 async def metrics_middleware(request: Request, call_next):
     method = request.method
-    # Use route path if available; fallback to raw URL path (e.g., for 404)
+
+    # Use route path if available
     endpoint = request.scope.get("route").path if request.scope.get("route") else request.url.path
 
     start_time = time.time()
