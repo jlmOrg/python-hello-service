@@ -1,5 +1,4 @@
 import time
-
 from fastapi import Request
 from prometheus_client import Counter, Histogram
 
@@ -23,9 +22,8 @@ ERROR_COUNT = Counter(
 # Middleware function to collect metrics on all requests
 async def metrics_middleware(request: Request, call_next):
     method = request.method
-
-    # Use route path if available
-    endpoint = request.scope.get("route").path if request.scope.get("route") else request.url.path
+    route = request.scope.get("route")
+    endpoint = getattr(route, "path", request.url.path)
 
     start_time = time.time()
     response = await call_next(request)
@@ -35,7 +33,6 @@ async def metrics_middleware(request: Request, call_next):
     REQUEST_LATENCY.labels(method=method, endpoint=endpoint).observe(latency)
     REQUEST_COUNT.labels(method=method, endpoint=endpoint, http_status=str(status_code)).inc()
 
-    # Count all 4xx and 5xx responses as errors
     if status_code >= 400:
         ERROR_COUNT.labels(method=method, endpoint=endpoint).inc()
 

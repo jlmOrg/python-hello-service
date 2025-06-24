@@ -66,11 +66,13 @@ kubectl port-forward python-hello-service-68b547bfdf-bdn5t 8000:8000
 
 
 # Metrics
-## Prometheus
-### Download Prometheus
+
+## Local Instance
+### Prometheus
+#### Download Prometheus
 https://prometheus.io/download/
 
-### Update `prometheus.yml`
+#### Update `prometheus.yml`
 Add another job to the `scrape_configs`. This allows Prometheus to scrape this service running locally on port `8000`
 ```yaml
   - job_name: 'python-hello-service'
@@ -78,7 +80,7 @@ Add another job to the `scrape_configs`. This allows Prometheus to scrape this s
       - targets: ['localhost:8000']
 ```
 
-### Start Prometheus
+#### Start Prometheus
 From the directory where `prometheus.exe` and `prometheus.yml` lie, run this in a command prompt
 ```shell
 ./prometheus --config.file=prometheus.yml
@@ -86,16 +88,44 @@ From the directory where `prometheus.exe` and `prometheus.yml` lie, run this in 
 
 Now Prometheus can be viewable on port `9090`
 
-## Grafana
-### Download Grafana
+### Grafana
+#### Download Grafana
 https://grafana.com/grafana/download
 
-### Run Grafana
+#### Run Grafana
 Run `grafana-server` to start Grafana. Will run on port `3000`
 
-## Add Prometheus Datasource
+### Add Prometheus Datasource
 Add Prometheus as a datasource via `http://localhost:9000`
 
+## Deployed Instance
+### Set Correct Context
+```shell
+kubectl config use-context arn:aws:eks:us-east-1:550487074477:cluster/dev-hello-service
+```
+
+### Deploy Prometheus (if not already)
+```shell
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack
+```
+
+### Apply `servicemonitor` (if not already)
+```shell
+kubectl apply -f servicemonitor.yml
+```
+### Port-Forward Grafana
+```shell
+kubectl port-forward svc/prometheus-grafana 6789:80
+```
+This makes it so that `localhost:6789` will bring you to the Grafana login page 
+
+### Get Grafana Password
+```shell
+ kubectl --namespace default get secrets prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+ ```
+Use this password to log in and view the metrics
 
 # Connect to EKS
 ## Add EKS Cluster
