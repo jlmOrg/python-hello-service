@@ -1,0 +1,4 @@
+name: "python-hello-service"
+
+image:
+  repository: "550487074477.dkr.ecr.us-east-1.amazonaws.com/python-hello-service"
