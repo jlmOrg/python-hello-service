@@ -47,17 +47,26 @@ kind create cluster --name python-dev
 kind load docker-image python-hello-service:latest --name python-dev
 ```
 
-## Run the `deployment.yml`
-This creates and maintains the pods
-```shell
-kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/deployment.yml
-```
+[//]: # (## Run the `deployment.yml`)
 
-## Run the `service.yml`
-This allows for connectivity to the service
-```shell
-kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/service.yml
-```
+[//]: # (This creates and maintains the pods)
+
+[//]: # (```shell)
+
+[//]: # (kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/deployment.yml)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (## Run the `service.yml`)
+
+[//]: # (This allows for connectivity to the service)
+
+[//]: # (```shell)
+
+[//]: # (kubectl apply -f /mnt/p/GitRepos/SampleAWSProject/python-microservice/deploy/service.yml)
+
+[//]: # (```)
 
 ## Port-forward Into The Pod
 ```shell
@@ -111,10 +120,13 @@ helm repo update
 helm install prometheus prometheus-community/kube-prometheus-stack
 ```
 
-### Apply `servicemonitor` (if not already)
-```shell
-kubectl apply -f servicemonitor.yml
-```
+[//]: # (### Apply `servicemonitor` &#40;if not already&#41;)
+
+[//]: # (```shell)
+
+[//]: # (kubectl apply -f servicemonitor.yml)
+
+[//]: # (```)
 ### Port-Forward Grafana
 ```shell
 kubectl port-forward svc/prometheus-grafana 6789:80
